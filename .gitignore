@@ -2,3 +2,4 @@
 *.lock
 /gemfiles/vendor/
 /vendor
+pkg/*
