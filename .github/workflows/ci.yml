@@ -10,6 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         ruby:
+          - '1.9.3'
           - '2.0.0'
           - '2.1.9'
           - '2.2'
@@ -27,6 +28,8 @@ jobs:
           - gemfiles/Gemfile.minitest4
           - gemfiles/Gemfile.unit-test
         include:
+          - ruby: '1.9.3'
+            gemfile: gemfiles/Gemfile.empty
           - ruby: '2.0.0'
             gemfile: gemfiles/Gemfile.empty
           - ruby: '2.1.9'
