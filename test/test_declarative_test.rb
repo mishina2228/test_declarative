@@ -60,9 +60,9 @@ class TestDeclarativeTest < TEST_CASE
     assert called
   end
 
-  # Run only Minitest is required
+  # Run only if Minitest is required
   if %w[Gemfile Gemfile.minitest4].include?(GEMFILE)
-    def test_not_to_print_deprecated_warnings
+    def test_do_not_print_deprecated_warnings
       targets = []
       targets << MiniTest::Unit::TestCase if defined?(MiniTest::Unit::TestCase)
       targets << Minitest::Test           if defined?(Minitest::Test)
@@ -70,7 +70,7 @@ class TestDeclarativeTest < TEST_CASE
       begin
         targets.each do |target|
           target.class_eval do
-            alias :orig_test :test
+            alias_method :orig_test, :test
             undef :test
           end
         end
@@ -83,7 +83,7 @@ class TestDeclarativeTest < TEST_CASE
       ensure
         targets.each do |target|
           target.class_eval do
-            alias :test :orig_test unless target.respond_to?(:test)
+            alias_method :test, :orig_test unless target.respond_to?(:test)
           end
         end
       end
